@@ -1,0 +1,28 @@
+.main-content {
+  padding: 40px 0; }
+  .main-content .movie-detail ul.nav-tabs {
+    display: flex;
+    justify-content: center;
+    border-color: #999999; }
+    .main-content .movie-detail ul.nav-tabs li a.active {
+      background-color: #141414; }
+  .main-content .tab-content .show-content .card {
+    border: 0;
+    border-radius: 10px 10px 0 0; }
+    .main-content .tab-content .show-content .card .card-header {
+      background-color: #191919; }
+    .main-content .tab-content .show-content .card .card-body {
+      background-color: #141414;
+      border: 4px solid #191919; }
+      .main-content .tab-content .show-content .card .card-body a {
+        margin-bottom: 15px; }
+        .main-content .tab-content .show-content .card .card-body a:hover {
+          color: red; }
+        .main-content .tab-content .show-content .card .card-body a .img-video img {
+          max-width: 100%; }
+        .main-content .tab-content .show-content .card .card-body a .video-info .video-name {
+          font-size: 20px; }
+        .main-content .tab-content .show-content .card .card-body a .video-info .video-duration {
+          font-size: 15px; }
+
+/*# sourceMappingURL=watch-show.css.map */
