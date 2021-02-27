@@ -18,7 +18,7 @@ class CreateCategoryVideosTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
-            $table->text('slug')->unique();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
