@@ -26,7 +26,7 @@ class CreateVideosTable extends Migration
             $table->string('duration');
             $table->text('video');
             $table->tinyInteger('inHome')->default(0);
-            $table->text('slug')->unique();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

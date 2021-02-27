@@ -23,7 +23,7 @@ class CreateShowsTable extends Migration
             $table->longText('content')->nullable();
             $table->string('language');
             $table->text('banner')->nullable();
-            $table->text('slug')->unique();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
