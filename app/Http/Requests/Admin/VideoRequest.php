@@ -22,6 +22,7 @@ class VideoRequest extends FormRequest
             'language'              => 'required|string',
             'duration'              => 'required',
             'video_name'            => 'required',
+            'slug'                  => 'required|unique:videos,slug' . $this->id
         ];
     }
     public function messages(){
@@ -38,7 +39,9 @@ class VideoRequest extends FormRequest
             'language.required'                 => 'This Field Is Required',
             'language.string'                   => 'This Field Must Be Letters Only',
             'duration.required'                 => 'This Field Is Required',
-            'video_name.required'               => 'This Field Is Required'
+            'video_name.required'               => 'This Field Is Required',
+            'slug.required'                     => 'This Field Is Required',
+            'slug.unique'                       => 'This Value Already Exists'
         ];
     }
 }
