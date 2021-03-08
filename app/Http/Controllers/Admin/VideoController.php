@@ -66,22 +66,26 @@ class VideoController extends Controller
         }
         $created = Video::create($data);
         if($created){
-            $audios = $request->audio;
-            $documents = $request->document;
-            if (count($audios) > 0) {
-                for ($i = 0; $i < count($audios); $i++) {
-                    $createAudio = VideoAudio::create([
-                        'video_id' => $created->id,
-                        'audio_id' => $audios[$i]
-                    ]);
+            if($request->has('audio')){
+                $audios = $request->audio;
+                if (count($audios) > 0) {
+                    for ($i = 0; $i < count($audios); $i++) {
+                        $createAudio = VideoAudio::create([
+                            'video_id' => $created->id,
+                            'audio_id' => $audios[$i]
+                        ]);
+                    }
                 }
             }
-            if (count($documents) > 0) {
-                for ($i = 0; $i < count($documents); $i++) {
-                    $createDocument = VideoDocument::create([
-                        'video_id' => $created->id,
-                        'document_id' => $documents[$i]
-                    ]);
+            if ($request->has('document')) {
+                $documents = $request->document;
+                if (count($documents) > 0) {
+                    for ($i = 0; $i < count($documents); $i++) {
+                        $createDocument = VideoDocument::create([
+                            'video_id' => $created->id,
+                            'document_id' => $documents[$i]
+                        ]);
+                    }
                 }
             }
             return redirect()->route('admin.video.index')->with(['message' => 'Video Created Successfully', 'alert-type' => 'success']);
