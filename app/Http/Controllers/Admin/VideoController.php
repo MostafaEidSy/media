@@ -28,6 +28,7 @@ class VideoController extends Controller
         return view('admin.video.create', compact('categories', 'audios', 'documents'));
     }
     public function uploadVideo(Request $request){
+        set_time_limit(120*5);
         if ($request->file('video')) {
             $video = $request->file('video');
             $filename = Str::slug( 'Video_' . Carbon::now()) . '.' . $video->getClientOriginalExtension();
