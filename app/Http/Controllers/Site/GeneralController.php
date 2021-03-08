@@ -168,8 +168,8 @@ class GeneralController extends Controller
     public function watchVideo($slug){
         $video = Video::where('slug', $slug)->with(['audios', 'documents'])->first();
         if ($video){
-            return view('site.watch-video', compact('video'));
-//            return response()->json($video);
+//            return view('site.watch-video', compact('video'));
+            return response()->json($video);
         }else{
             return redirect()->route('index');
         }

@@ -55,7 +55,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        @if($video->documents != null && $video->documents)
+                        @if($video->documents != null && $video->documents != '')
                             <h6 class="title-document">Attached Documents</h6>
                             @foreach($video->documents as $documentFor)
                                 <div class="content-document" style="margin-bottom: 20px">
