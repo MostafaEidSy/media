@@ -2,6 +2,34 @@
 
 @section('title', 'Edit Video')
 
+@section('style')
+    <link rel="stylesheet" href="{{asset('admin/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/summernote-bs4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/bootstrap-select.min.css')}}">
+    <style>
+        .bootstrap-select{
+            width: 100%!important;
+        }
+        .bootstrap-select .btn-light{
+            font-size: 16px!important;
+            border: 0!important;
+            background-color: #141414!important;
+            color: #D1D0CF!important;
+            padding: 10px 20px!important;
+        }
+        .bootstrap-select .dropdown-menu{
+            background-color: #141414!important;
+            box-shadow: 1px 1px 5px #444;
+        }
+        .bootstrap-select .dropdown-menu .bs-searchbox input{
+            background-color: #191919!important;
+        }
+        .bootstrap-select .dropdown-menu ul li a{
+            color: #D1D0CF!important;
+        }
+    </style>
+@endsection
+
 @section('videos')
     class="active active-menu"
 @endsection
@@ -63,6 +91,10 @@
                                                         <textarea id="text" name="description" rows="5" class="form-control" placeholder="Description">{{old('description', $video->description)}}</textarea>
                                                         @error('description')<span class="small text-danger">{{$message}}</span>@enderror
                                                     </div>
+                                                    <div class="col-12 form-group">
+                                                        <textarea id="content" name="content" rows="5" class="form-control" placeholder="Content">{{old('content', $video->content)}}</textarea>
+                                                        @error('content')<span class="small text-danger">{{$message}}</span>@enderror
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,9 +107,39 @@
                                                 <input type="text" name="language" id="language" class="form-control" placeholder="Language" required="required" value="{{old('language', $video->language)}}">
                                                 @error('language')<span class="small text-danger">{{$message}}</span>@enderror
                                             </div>
+                                            <div class="col-sm-6 form-group">
+                                                <select name="audio[]" multiple class="selectpicker" title="Audios" data-live-search="true">
+                                                    <option value="">No Audios</option>
+                                                    @foreach($audios as $audio)
+                                                        <option value="{{$audio->id}}"
+                                                            @foreach($video->audios as $checkAudio)
+                                                                @if($checkAudio->audio_id == $audio->id) selected @endif
+                                                            @endforeach
+                                                        >{{$audio->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('audio')<span class="small text-danger">{{$message}}</span>@enderror
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <select name="document[]" multiple class="selectpicker" title="Documents" data-live-search="true">
+                                                    <option value="">No Document</option>
+                                                    @foreach($documents as $document)
+                                                        <option value="{{$document->id}}"
+                                                        @foreach($video->documents as $checkDocument)
+                                                            @if($checkDocument->document_id == $document->id) selected @endif
+                                                        @endforeach
+                                                        >{{$document->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                @error('document')<span class="small text-danger">{{$message}}</span>@enderror
+                                            </div>
                                             <div class="col-sm-12 form-group">
                                                 <input type="text" class="form-control" placeholder="Video Duration" name="duration" required="required" value="{{old('duration', $video->duration)}}">
                                                 @error('duration')<span class="small text-danger">{{$message}}</span>@enderror
+                                            </div>
+                                            <div class="col-sm-12 form-group">
+                                                <input type="text" class="form-control" placeholder="Video Slug" name="slug" required="required" value="{{old('slug', $video->slug)}}">
+                                                @error('slug')<span class="small text-danger">{{$message}}</span>@enderror
                                             </div>
                                             <div class="col-12 form-group ">
                                                 <button type="submit" class="btn btn-primary btn-submit-info">Submit</button>
@@ -122,6 +184,24 @@
 @endsection
 
 @section('script')
+    <script src="{{asset('admin/js/summernote-bs4.min.js')}}"></script>
+    <script src="{{asset('admin/js/bootstrap-select.min.js')}}"></script>
+    <script src="{{asset('admin/js/all.min.js')}}"></script>
+    <script>
+        $('#content').summernote({
+            placeholder: 'Content',
+            height: 200,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['insert', ['link', 'picture']],
+            ]
+        });
+    </script>
     <script src="{{asset('admin/js/jquery.form.min.js')}}"></script>
     <script>
         $(document).ready(function(){

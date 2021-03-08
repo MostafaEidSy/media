@@ -63,4 +63,24 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
       Route::get('/delete-season/{id}', 'ShowController@deleteSeasons')->name('admin.show.season.delete');
    });
 
+   Route::group(['prefix' => 'audio'], function (){
+       Route::get('/', 'AudioController@index')->name('admin.audio.index');
+       Route::get('/add-audio', 'AudioController@create')->name('admin.audio.create');
+       Route::post('/upload-audio', 'AudioController@uploadVideo')->name('admin.audio.upload.audio');
+       Route::post('/story', 'AudioController@story')->name('admin.audio.story');
+       Route::get('/delete/{id}', 'AudioController@delete')->name('admin.audio.delete');
+       Route::get('/edit/{id}', 'AudioController@edit')->name('admin.audio.edit');
+       Route::post('/update', 'AudioController@update')->name('admin.audio.update');
+   });
+
+   Route::group(['prefix' => 'documents'], function (){
+       Route::get('/', 'DocumentController@index')->name('admin.document.index');
+       Route::get('/add-document', 'DocumentController@create')->name('admin.document.create');
+       Route::post('/upload-document', 'DocumentController@uploadVideo')->name('admin.document.upload.document');
+       Route::post('/story', 'DocumentController@story')->name('admin.document.story');
+       Route::get('/delete/{id}', 'DocumentController@delete')->name('admin.document.delete');
+       Route::get('/edit/{id}', 'DocumentController@edit')->name('admin.document.edit');
+       Route::post('/update', 'DocumentController@update')->name('admin.document.update');
+   });
+
 });

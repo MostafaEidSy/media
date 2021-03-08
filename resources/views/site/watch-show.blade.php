@@ -6,6 +6,18 @@
 
 @section('style')
     <link rel="stylesheet" href="{{asset('site/css/watch-show.css')}}">
+    <style>
+        .title-audio, .title-document{
+            margin: 20px 0;
+            text-align: center;
+            font-size: 26px;
+            border: 1px solid #999;
+            padding: 15px;
+            border-radius: 30px;
+            background-color: #191919;
+            box-shadow: 1px 1px 5px #444;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -70,6 +82,31 @@
                     <div class="video-content">
                     @if(!isset($video))
                         {{$show->seasons[0]->showVideo[0]->video->content}}
+                        @if($show->seasons[0]->showVideo[0]->video->audios != null)
+                            <h6 class="title-audio">Attached Audios</h6>
+                            @foreach($show->seasons[0]->showVideo[0]->video->audios as $audioFor)
+                                <div class="content-audio" style="margin-bottom: 20px">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <audio controls style="width: 100%">
+                                                <source src="{{asset('storage/uploads/audios/' . $audioFor->audios->audio_name)}}" type="audio/mpeg">
+                                            </audio>
+                                        </div>
+                                        <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                            <h6 class="audio-name">{{$audioFor->audios->name}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                        @if($show->seasons[0]->showVideo[0]->video->documents != null)
+                            <h6 class="title-document">Attached Documents</h6>
+                            @foreach($show->seasons[0]->showVideo[0]->video->documents as $documentFor)
+                                <div class="content-document" style="margin-bottom: 20px">
+                                    <iframe src="{{asset('storage/uploads/documents/' . $documentFor->document->document_name)}}" allowfullscreen style="width: 100%; height: 200px"></iframe>
+                                </div>
+                            @endforeach
+                        @endif
                     @else
                         {{$vide->content}}
                     @endif

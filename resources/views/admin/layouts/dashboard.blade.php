@@ -49,11 +49,13 @@
         <div id="sidebar-scrollbar">
             <nav class="iq-sidebar-menu">
                 <ul id="iq-sidebar-toggle" class="iq-menu">
-                    <li><a href="#" class="text-primary"><i class="ri-arrow-right-line"></i><span>Visit site</span></a></li>
+                    <li><a href="{{route('index')}}" class="text-primary" target="_blank"><i class="ri-arrow-right-line"></i><span>Visit site</span></a></li>
                     <li @yield('classDashboard')><a href="{{route('admin.index')}}" class="iq-waves-effect"><i class="las la-home iq-arrow-left"></i><span>Dashboard</span></a></li>
                     <li @yield('classRating')><a href="{{route('admin.rating.index')}}" class="iq-waves-effect"><i class="las la-star-half-alt"></i><span>Rating </span></a></li>
                     <li @yield('classComment')><a href="{{route('admin.comment.index')}}" class="iq-waves-effect"><i class="las la-comments"></i><span>Comment</span></a></li>
                     <li @yield('classUser')><a href="{{route('admin.users.index')}}" class="iq-waves-effect"><i class="las la-user-friends"></i><span>User</span></a></li>
+                    <li @yield('classAudio')><a href="{{route('admin.audio.index')}}" class="iq-waves-effect"><i class="lar la-file-audio"></i><span>Audios</span></a></li>
+                    <li @yield('classDocuments')><a href="{{route('admin.document.index')}}" class="iq-waves-effect"><i class="las la-file-contract"></i><span>Documents</span></a></li>
                     <li @yield('categories')>
                         <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Category</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="category" class="iq-submenu collapse @yield('CategoryShow')" data-parent="#iq-sidebar-toggle">

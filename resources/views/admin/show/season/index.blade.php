@@ -65,7 +65,6 @@
                                                 <td><p>{{$season->description}}</p></td>
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
-                                                        <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="#"><i class="lar la-eye"></i></a>
                                                         <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{route('admin.show.season.edit', $season->id)}}"><i class="ri-pencil-line"></i></a>
                                                         <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="{{route('admin.show.season.delete', $season->id)}}"><i class="ri-delete-bin-line"></i></a>
                                                     </div>

@@ -155,10 +155,14 @@ class GeneralController extends Controller
             return redirect()->route('index');
         }
     }
-    public function watchShow($slug, $video = null){
+    public function watchShow($slug, $videoId = null){
         $show = Show::where('slug', $slug)->with(['seasons'])->first();
-        $videos = VideoSeason::with(['video'])->get();
+        if($videoId != null){
+            $video = Video::where('id', $videoId)->first();
+            return view('site.watch-show', compact('show', 'video'));
+        }else{
+            return view('site.watch-show', compact('show'));
+        }
 //        return response()->json($show);
-        return view('site.watch-show', compact('show'));
     }
 }

@@ -18,6 +18,6 @@ Route::group(['namespace' => 'Site'], function (){
        Route::post('/manage-profile/{id}', 'GeneralController@updateManage')->name('manage.profile.update');
        Route::get('/setting-profile', 'GeneralController@settingProfile')->name('manage.profile.setting');
        Route::get('/add-favorites/{id}', 'GeneralController@addFavorites')->name('add.favorites');
-       Route::get('watch-show/{slug}/{video?}', 'GeneralController@watchShow')->name('watch.show');
+       Route::get('watch-show/{slug}/{videoId?}', 'GeneralController@watchShow')->name('watch.show');
    });
 });
