@@ -104,7 +104,7 @@
                             <ul class="favorites-slider list-inline row p-0 mb-0">
                                 @foreach($videos as $video)
                                     <li class="slide-item">
-                                        <a href="#">
+                                        <a href="{{route('watch.video', $video->slug)}}">
                                             <div class="block-images position-relative">
                                                 <div class="img-box">
                                                     <img src="{{asset('uploads/images/video/' . $video->image)}}" class="img-fluid" alt="">

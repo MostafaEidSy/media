@@ -19,5 +19,6 @@ Route::group(['namespace' => 'Site'], function (){
        Route::get('/setting-profile', 'GeneralController@settingProfile')->name('manage.profile.setting');
        Route::get('/add-favorites/{id}', 'GeneralController@addFavorites')->name('add.favorites');
        Route::get('watch-show/{slug}/{videoId?}', 'GeneralController@watchShow')->name('watch.show');
+       Route::get('watch-video/{slug}', 'GeneralController@watchVideo')->name('watch.video');
    });
 });
