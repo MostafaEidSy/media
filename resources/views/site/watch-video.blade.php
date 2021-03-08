@@ -38,7 +38,7 @@
                 <div class="tab-pane fade show active" id="videoContent" role="tabpanel" aria-labelledby="videoContent-tab">
                     <div class="video-content">
                         {!! $video->content !!}
-                        @if($video->audios != null && $video->audios != '')
+                        @if($video->audios != null && $video->audios != '' && count($video->audios) > 0)
                             <h6 class="title-audio">Attached Audios</h6>
                             @foreach($video->audios as $audioFor)
                                 <div class="content-audio" style="margin-bottom: 20px">
@@ -55,7 +55,7 @@
                                 </div>
                             @endforeach
                         @endif
-                        @if($video->documents != null && $video->documents != '')
+                        @if($video->documents != null && $video->documents != '' && count($video->documents) > 0)
                             <h6 class="title-document">Attached Documents</h6>
                             @foreach($video->documents as $documentFor)
                                 <div class="content-document" style="margin-bottom: 20px">
