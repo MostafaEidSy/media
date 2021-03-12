@@ -1,0 +1,104 @@
+.title-audio, .title-document{
+    margin: 20px 0;
+    text-align: center;
+    font-size: 26px;
+    border: 1px solid #999;
+    padding: 15px;
+    border-radius: 30px;
+    background-color: #191919;
+    box-shadow: 1px 1px 5px #444;
+}
+.content-comments .title-comments{
+    margin: 20px 0;
+}
+.content-comments .title-comments h6{
+    font-size: 26px;
+    padding: 15px;
+    background-color: #191919;
+    border-radius: 30px;
+    box-shadow: 1px 1px 5px #555;
+}
+.content-comments .comments{
+    padding: 20px 0;
+}
+.content-comments .comments .media{
+    background-color: #191919;
+    padding: 20px 20px 40px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.content-comments .comments .media img{
+    max-width: 60px;
+    border-radius: 50%;
+}
+.content-comments .comments .media .media-body .name{
+    margin-bottom: 15px;
+}
+.content-comments .comments .media .media-body p.comment{
+    font-size: 14px;
+}
+.content-comments .comments .media .media-body p.date{
+    font-size: 14px;
+    display: inline-block;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 20px;
+    border-left: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-radius: 0 0 0 20px;
+}
+.content-comments .comments .media .media-body span.reply{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px 20px;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
+    font-size: 14px;
+    border-radius: 20px 0 0 0;
+    cursor: pointer;
+}
+.content-comments .comments .media .media-body span.reply:hover{
+    color: red;
+}
+.content-comments .comments .media .media-body .media{
+    border: 1px solid #999;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #141414;
+}
+.content-comments .add-comment{
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #191919;
+}
+.content-comments .add-comment .title{
+    margin-bottom: 20px;
+}
+.content-comments .add-comment .title h6{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.content-comments .add-comment .title span{
+    font-size: 13px;
+}
+.content-comments .add-comment .body form textarea{
+    margin-bottom: 15px;
+    height: 150px;
+    resize: none;
+    border-radius: 20px;
+}
+.content-comments .add-comment .body form button{
+    border-radius: 20px !important;
+}
+.content-comments .add-comment .title h6 .cancel{
+    margin-left: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.content-comments .add-comment .title h6 .cancel:hover{
+    color: red;
+}

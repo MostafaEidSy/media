@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="iq-card-body">
-                            <form action="{{route('admin.show.update')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('admin.show.update', $show->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$show->id}}">
                                 <div class="row">
@@ -61,6 +61,10 @@
                                         <label id="gallery3" for="show2">Upload Show Banner</label>
                                         <input data-name="#gallery3" id="show2" name="banner" class="form_gallery-upload" type="file" accept=".png, .jpg, .jpeg">
                                         @error('banner')<span class="small text-danger">{{$message}}</span>@enderror
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <input type="text" name="slug" id="slug" class="form-control" required="required" placeholder="Slug" value="{{old('slug', $show->slug)}}">
+                                        @error('slug')<span class="small text-danger">{{$message}}</span>@enderror
                                     </div>
                                     <div class="col-12 form-group">
                                         <textarea id="text1" name="description" rows="5" class="form-control" placeholder="Description">{{old('description', $show->description)}}</textarea>

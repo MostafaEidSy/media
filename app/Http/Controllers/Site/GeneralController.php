@@ -7,7 +7,9 @@ use App\Http\Requests\Site\LoginRequest;
 use App\Http\Requests\Site\ManageRequest;
 use App\Http\Requests\Site\SignUpRequest;
 use App\Models\CategoryVideo;
+use App\Models\Comment;
 use App\Models\Favorite;
+use App\Models\Page;
 use App\Models\Show;
 use App\Models\User;
 use App\Models\Video;
@@ -158,7 +160,7 @@ class GeneralController extends Controller
     public function watchShow($slug, $videoId = null){
         $show = Show::where('slug', $slug)->with(['seasons'])->first();
         if($videoId != null){
-            $video = Video::where('id', $videoId)->first();
+            $video = Video::where('id', $videoId)->with(['audios', 'documents', 'comments'])->first();
             return view('site.watch-show', compact('show', 'video'));
         }else{
             return view('site.watch-show', compact('show'));
@@ -166,10 +168,62 @@ class GeneralController extends Controller
 //        return response()->json($show);
     }
     public function watchVideo($slug){
-        $video = Video::where('slug', $slug)->with(['audios', 'documents'])->first();
+        $video = Video::where('slug', $slug)->with(['audios', 'documents', 'comments'])->first();
         if ($video){
             return view('site.watch-video', compact('video'));
 //            return response()->json($video);
+        }else{
+            return redirect()->route('index');
+        }
+    }
+    public function addComment(Request $request){
+        if (auth()->user()->avatar != null || auth()->user()->avatar != ''){
+            $avatar = asset('uploads/avatars/' . auth()->user()->avatae);
+        }else{
+            $avatar = asset('uploads/avatars/user.png');
+        }
+        if ($request->has('parent_id')){
+            $date = [];
+            $date['video_id'] = $request->video_id;
+            $date['user_id'] = auth()->user()->id;
+            $date['comment'] = $request->comment;
+            $date['parent_id'] = $request->parent_id;
+            $created = Comment::create($date);
+            if ($created) {
+                return response()->json([
+                    'status' => true,
+                    'commentParent' => 1,
+                    'id' => $created->id,
+                    'name' => auth()->user()->name,
+                    'date' => date("j F, Y", strtotime($created->created_at)) . ' at ' . date('g:i a', strtotime($created->created_at)),
+                    'comment' => $request->comment,
+                    'avatar' => $avatar,
+                    'parentComment' => $request->parent_id,
+                ], 200);
+            }
+        }else {
+            $date = [];
+            $date['video_id'] = $request->video_id;
+            $date['user_id'] = auth()->user()->id;
+            $date['comment'] = $request->comment;
+            $created = Comment::create($date);
+            if ($created) {
+                return response()->json([
+                    'status' => true,
+                    'commentParent' => 0,
+                    'id' => $created->id,
+                    'name' => auth()->user()->name,
+                    'date' => date("j F, Y", strtotime($created->created_at)) . ' at ' . date('g:i a', strtotime($created->created_at)),
+                    'comment' => $request->comment,
+                    'avatar' => $avatar
+                ], 200);
+            }
+        }
+    }
+    public function showPage($slug){
+        $page = Page::where('slug', $slug)->first();
+        if ($page){
+            return view('site.show-page', compact('page'));
         }else{
             return redirect()->route('index');
         }

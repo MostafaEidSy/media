@@ -106,7 +106,7 @@ class ShowController extends Controller
             return redirect()->route('admin.show.index')->with(['message' => 'Sorry, This Show Does Not Exist', 'alert-type' => 'danger']);
         }
     }
-    public function updateShow(ShowRequest $request){
+    public function updateShow($id, ShowRequest $request){
         $id = $request->input('id');
         $show = Show::where('id', $id)->first();
         if ($show){
@@ -116,6 +116,7 @@ class ShowController extends Controller
             $data['category_id'] = $request->input('category');
             $data['quality'] = $request->input('quality');
             $data['description'] = $request->input('description');
+            $data['slug'] = $request->input('slug');
             if ($request->file('image')) {
                 $image = $request->file('image');
                 $filename = Str::slug($request->input('title') . '_' . Carbon::now()) . '.' . $image->getClientOriginalExtension();

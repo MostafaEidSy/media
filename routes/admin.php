@@ -22,6 +22,7 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
 
    Route::group(['prefix' => 'comments'], function (){
       Route::get('/', 'CommentController@index')->name('admin.comment.index');
+      Route::get('/delete/{id}', 'CommentController@delete')->name('admin.comment.delete');
    });
 
    Route::group(['prefix' => 'users'], function (){
@@ -44,7 +45,7 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
       Route::post('/story', 'VideoController@story')->name('admin.video.story');
       Route::get('/delete/{id}', 'VideoController@delete')->name('admin.video.delete');
       Route::get('/edit/{id}', 'VideoController@edit')->name('admin.video.edit');
-      Route::post('/update', 'VideoController@update')->name('admin.video.update');
+      Route::post('/update/{id}', 'VideoController@update')->name('admin.video.update');
       Route::post('/update/in-home', 'VideoController@inHome')->name('admin.video.in.home');
    });
 
@@ -53,7 +54,7 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
       Route::get('/add-show', 'ShowController@create')->name('admin.show.create');
       Route::post('/story-show', 'ShowController@storyShow')->name('admin.show.story');
       Route::get('/edit-show/{id}', 'ShowController@editShow')->name('admin.show.edit');
-      Route::post('/update-show', 'ShowController@updateShow')->name('admin.show.update');
+      Route::post('/update-show/{id}', 'ShowController@updateShow')->name('admin.show.update');
       Route::get('/delete-show/{id}', 'ShowController@deleteShow')->name('admin.show.delete');
       Route::get('/seasons', 'ShowController@seasons')->name('admin.show.season.index');
       Route::get('/add-season', 'ShowController@createSeasons')->name('admin.show.season.create');
@@ -81,6 +82,15 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
        Route::get('/delete/{id}', 'DocumentController@delete')->name('admin.document.delete');
        Route::get('/edit/{id}', 'DocumentController@edit')->name('admin.document.edit');
        Route::post('/update', 'DocumentController@update')->name('admin.document.update');
+   });
+
+   Route::group(['prefix' => 'pages'], function (){
+       Route::get('/', 'PageController@index')->name('admin.page.index');
+       Route::get('/add-page', 'PageController@create')->name('admin.page.create');
+       Route::post('/story', 'PageController@story')->name('admin.page.story');
+       Route::get('/edit/{id}', 'PageController@edit')->name('admin.page.edit');
+       Route::post('/update/{id}', 'PageController@update')->name('admin.page.update');
+       Route::get('/delete/{id}', 'PageController@delete')->name('admin.page.delete');
    });
 
 });

@@ -63,6 +63,10 @@
                                     </div>
                                     <div class="col-12 form-group">
                                         <input type="text" name="slug" id="slug" class="form-control" required="required" placeholder="Slug" value="{{old('slug')}}">
+                                        @error('slug')<span class="small text-danger">{{$message}}</span>@enderror
+                                    </div>
+                                    <div class="col-12 form-group">
+                                        <input type="text" name="slug" id="slug" class="form-control" required="required" placeholder="Slug" value="{{old('slug')}}">
                                     </div>
                                     <div class="col-12 form-group">
                                         <textarea id="text1" name="description" rows="5" class="form-control" placeholder="Description"></textarea>

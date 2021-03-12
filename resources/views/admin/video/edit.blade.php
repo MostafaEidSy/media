@@ -54,7 +54,7 @@
                         <div class="iq-card-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form action="{{route('admin.video.update')}}" class="form-info-video" enctype="multipart/form-data" method="post">
+                                    <form action="{{route('admin.video.update', $video->id)}}" class="form-info-video" enctype="multipart/form-data" method="post">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$video->id}}">
                                         <input type="hidden" name="video_name" id="video_name" value="{{$video->video}}">

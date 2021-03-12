@@ -55,7 +55,8 @@
                     <li @yield('classComment')><a href="{{route('admin.comment.index')}}" class="iq-waves-effect"><i class="las la-comments"></i><span>Comment</span></a></li>
                     <li @yield('classUser')><a href="{{route('admin.users.index')}}" class="iq-waves-effect"><i class="las la-user-friends"></i><span>User</span></a></li>
                     <li @yield('classAudio')><a href="{{route('admin.audio.index')}}" class="iq-waves-effect"><i class="lar la-file-audio"></i><span>Audios</span></a></li>
-                    <li @yield('classDocuments')><a href="{{route('admin.document.index')}}" class="iq-waves-effect"><i class="las la-file-contract"></i><span>Documents</span></a></li>
+                    <li @yield('classDocuments')><a href="{{route('admin.document.index')}}" class="iq-waves-effect"><i class="las la-file-pdf"></i><span>Documents</span></a></li>
+                    <li @yield('classPages')><a href="{{route('admin.page.index')}}" class="iq-waves-effect"><i class="las la-file-contract"></i><span>Pages</span></a></li>
                     <li @yield('categories')>
                         <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Category</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="category" class="iq-submenu collapse @yield('CategoryShow')" data-parent="#iq-sidebar-toggle">

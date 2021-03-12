@@ -117,8 +117,7 @@ class VideoController extends Controller
             return redirect()->route('admin.video.index')->with(['message' => 'Sorry, This Video Does Not Exist', 'alert-type' => 'danger']);
         }
     }
-    public function update(VideoRequest $request){
-        $id = $request->input('id');
+    public function update($id, VideoRequest $request){
         $video = Video::where('id', $id)->first();
         if ($video){
             $data = [];

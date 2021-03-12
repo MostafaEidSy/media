@@ -12,6 +12,7 @@ Route::group(['namespace' => 'Site'], function (){
    Route::get('/', 'GeneralController@index')->name('index');
    Route::get('/pricing', 'GeneralController@pricing')->name('pricing');
    Route::get('/{slug}', 'GeneralController@showDetails')->name('show.details');
+   Route::get('/page/{slug}', 'GeneralController@showPage')->name('show.page');
    Route::group(['middleware' => 'auth:web'], function (){
        Route::get('/logout', 'GeneralController@logout')->name('logout');
        Route::get('/manage-profile', 'GeneralController@manage')->name('manage.profile');
@@ -20,5 +21,6 @@ Route::group(['namespace' => 'Site'], function (){
        Route::get('/add-favorites/{id}', 'GeneralController@addFavorites')->name('add.favorites');
        Route::get('watch-show/{slug}/{videoId?}', 'GeneralController@watchShow')->name('watch.show');
        Route::get('watch-video/{slug}', 'GeneralController@watchVideo')->name('watch.video');
+       Route::post('add-comment', 'GeneralController@addComment')->name('add.comment');
    });
 });

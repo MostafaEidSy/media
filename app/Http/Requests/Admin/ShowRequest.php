@@ -19,7 +19,8 @@ class ShowRequest extends FormRequest
             'quality'           => 'required',
             'image'             => 'nullable|image|mimes:jpg,png,jpeg,gif',
             'banner'            => 'nullable|image|mimes:jpg,png,jpeg,gif',
-            'description'       => 'nullable|string'
+            'description'       => 'nullable|string',
+            'slug'              => 'required|unique:shows,slug,' . $this->id
         ];
     }
     public function messages(){
@@ -34,6 +35,8 @@ class ShowRequest extends FormRequest
             'banner.image'                      => 'This field should be an image only',
             'banner.mimes'                      => 'Sorry, The Image Extension Is Not Supported. The Supported Extensions Are jpg, png, jpeg, gif Only',
             'description.string'                => 'This Field Must Be Letters Only',
+            'slug.required'                     => 'This Field Is Required',
+            'slug.unique'                       => 'This Value Already Exists'
         ];
     }
 }

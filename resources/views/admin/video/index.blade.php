@@ -79,7 +79,7 @@
                                                 <td><p>{{$video->description}}</p></td>
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
-                                                        <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="View" href="{{route('watch.video', $video->slug)}}"><i class="lar la-eye"></i></a>
+                                                        <a class="iq-bg-warning" data-toggle="tooltip" data-placement="top" title="" target="_blank" data-original-title="View" href="{{route('watch.video', $video->slug)}}"><i class="lar la-eye"></i></a>
                                                         <a class="iq-bg-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="{{route('admin.video.edit', $video->id)}}"><i class="ri-pencil-line"></i></a>
                                                         <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="{{route('admin.video.delete', $video->id)}}"><i class="ri-delete-bin-line"></i></a>
                                                     </div>

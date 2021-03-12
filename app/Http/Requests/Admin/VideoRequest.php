@@ -22,7 +22,7 @@ class VideoRequest extends FormRequest
             'language'              => 'required|string',
             'duration'              => 'required',
             'video_name'            => 'required',
-            'slug'                  => 'required|unique:videos,slug' . $this->id
+            'slug'                  => 'required|unique:videos,slug,' . $this->id
         ];
     }
     public function messages(){
