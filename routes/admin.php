@@ -112,7 +112,7 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
 
    Route::get('role', function (){
        $role = \App\Role::create(['name' => 'user']);
-       $permission = \App\Permission::create(['name', 'Subscriber']);
+       $permission = \App\Permission::create(['name' => 'Subscriber']);
        $role->givePermissionTo($permission);
        return redirect()->route('index');
    });
