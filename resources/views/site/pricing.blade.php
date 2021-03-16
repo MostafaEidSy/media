@@ -2,112 +2,80 @@
 
 @section('title', 'Pricing')
 
+@section('style')
+    <style>
+        .box-plan{
+            padding: 30px 15px;
+            background-color: #191919;
+            border-radius: 20px;
+            box-shadow: 1px 1px 5px #999;
+            margin-bottom: 20px;
+        }
+        .box-plan .name{
+            font-size: 30px;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .box-plan .price{
+            margin-bottom: 20px;
+        }
+        .box-plan .price .s1{
+            display: block;
+            text-align: center;
+            font-size: 42px;
+            color: #fff;
+            letter-spacing: 10px;
+            font-style: italic;
+            font-weight: 100;
+        }
+        .box-plan .price .s2{
+            display: block;
+            text-align: center;
+            font-size: 20px;
+        }
+        .box-plan .desc{
+            margin-bottom: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+        footer{
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            z-index: 99999;
+        }
+        .m-profile{
+            padding-bottom: 180px;
+        }
+    </style>
+@endsection
+
 @section('content')
     <section class="m-profile">
         <div class="container">
-            <h4 class="main-title mb-4">Pricing Plan</h4>
+            <h4 class="main-title mb-4 text-center">Pricing Plan</h4>
             <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="sign-user_card">
-                        <div class="table-responsive pricing pt-2">
-                            <table id="my-table" class="table">
-                                <thead>
-                                <tr>
-                                    <th class="text-center prc-wrap"></th>
-                                    <th class="text-center prc-wrap">
-                                        <div class="prc-box">
-                                            <div class="h3 pt-4 text-white">$19<small> / Per month</small></div>
-                                            <span class="type">Basic</span>
-                                        </div>
-                                    </th>
-                                    <th class="text-center prc-wrap">
-                                        <div class="prc-box active">
-                                            <div class="h3 pt-4 text-white">$39<small> / Per month</small></div>
-                                            <span class="type">Standard</span>
-                                        </div>
-                                    </th>
-                                    <th class="text-center prc-wrap">
-                                        <div class="prc-box">
-                                            <div class="h3 pt-4 text-white">$119<small> / Per month</small></div>
-                                            <span class="type">Platinum</span>
-                                        </div>
-                                    </th>
-                                    <th class="text-center prc-wrap">
-                                        <div class="prc-box">
-                                            <div class="h3 pt-4 text-white">$219<small> / Per month</small></div>
-                                            <span class="type">Premium</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th class="text-center" scope="row">New Movies</th>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                    </td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">Streamit Special</th>
-                                    <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                    <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                    </td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">American Tv Shows</th>
-                                    <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                    <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                    </td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">Hollywood Movies</th>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell active"><i class="ri-check-line ri-2x"></i>
-                                    </td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">Video Quality</th>
-                                    <td class="text-center child-cell">SD (480p)</td>
-                                    <td class="text-center child-cell active">HD (720p)</td>
-                                    <td class="text-center child-cell">FHD (1080p)</td>
-                                    <td class="text-center child-cell">FHD (1080p)</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-center" scope="row">Ad Free Entertainment</th>
-                                    <td class="text-center child-cell"><i class="ri-close-line i_close"></i></td>
-                                    <td class="text-center child-cell active"><i class="ri-close-line i_close"></i>
-                                    </td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                    <td class="text-center child-cell"><i class="ri-check-line ri-2x"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center"><i class="ri-close-line i_close"></i></td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-hover mt-3">Purchase</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-hover mt-3">Purchase</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-hover mt-3">Purchase</a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="#" class="btn btn-hover mt-3">Purchase</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                @foreach($plans as $plan)
+                    <div class="col-md-4">
+                        <div class="box-plan">
+                            <h4 class="name">{{$plan->name}}</h4>
+                            <div class="price">
+                                <span class="s1">{{$plan->price}}/<sup>{{$plan->currency}}</sup></span>
+                                <span class="s2">Monthly</span>
+                            </div>
+                            <div class="desc">{{$plan->description}}</div>
+                            <div class="link">
+                                <a href="{{route('checkout', [$plan->id, $plan->name])}}" class="btn btn-danger btn-block" style="border-radius: 20px !important;">Subscribe Now</a>
+{{--                                <form action="{{ route('create-agreement', $plan->paypal_id) }}" method="post">--}}
+{{--                                    @csrf--}}
+{{--                                    <button type="submit" class="btn btn-danger btn-block" style="border-radius: 20px !important;">Subscribe Now</button>--}}
+{{--                                </form>--}}
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

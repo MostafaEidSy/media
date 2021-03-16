@@ -63,6 +63,20 @@
                                                 @error('language')<span class="small text-danger">{{$message}}</span>@enderror
                                             </div>
                                         </div>
+                                        <div class="form-group d-flex flex-md-row flex-column">
+                                            <div class="iq-custom-select d-inline-block manage-gen w-50">
+                                                <input type="text" name="city" id="city" class="form-control" placeholder="City" value="{{old('city', $user->city)}}">
+                                                @error('city')<span class="small text-danger">{{$message}}</span>@enderror
+                                            </div>
+                                            <div class="iq-custom-select d-inline-block lang-dropdown manage-dd w-50 ml-1">
+                                                <input type="text" name="postal_code" id="postal_code" class="form-control" value="{{old('postal_code', $user->postal_code)}}" placeholder="Postal Code">
+                                                @error('postal_code')<span class="small text-danger">{{$message}}</span>@enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="address" id="address" class="form-control" placeholder="Address" value="{{old('address', $user->address)}}">
+                                            @error('address')<span class="small text-danger">{{$message}}</span>@enderror
+                                        </div>
                                         <div class="form-group">
                                             <label for="abstract">Abstract</label>
                                             <textarea name="abstract" id="abstract" class="form-control" style="height: 150px;resize: none;">{{old('abstract', $user->abstract)}}</textarea>

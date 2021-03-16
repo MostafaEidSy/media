@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{env('APP_NAME')}} | @yield('title')</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('admin/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('uploads/website/icon.png')}}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('admin/css/bootstrap.min.css')}}">
     <!--datatable CSS -->
@@ -33,9 +33,9 @@
     <div class="iq-sidebar">
         <div class="iq-sidebar-logo d-flex justify-content-between">
             <a href="#" class="header-logo">
-                <img src="{{asset('admin/images/logo.png')}}" class="img-fluid rounded-normal" alt="">
+                <img src="{{asset('uploads/website/icon.png')}}" class="img-fluid rounded-normal" alt="">
                 <div class="logo-title">
-                    <span class="text-primary text-uppercase">Streamit</span>
+                    <span class="text-primary text-uppercase">{{env('APP_NAME')}}</span>
                 </div>
             </a>
             <div class="iq-menu-bt-sidebar">
@@ -57,6 +57,7 @@
                     <li @yield('classAudio')><a href="{{route('admin.audio.index')}}" class="iq-waves-effect"><i class="lar la-file-audio"></i><span>Audios</span></a></li>
                     <li @yield('classDocuments')><a href="{{route('admin.document.index')}}" class="iq-waves-effect"><i class="las la-file-pdf"></i><span>Documents</span></a></li>
                     <li @yield('classPages')><a href="{{route('admin.page.index')}}" class="iq-waves-effect"><i class="las la-file-contract"></i><span>Pages</span></a></li>
+                    <li @yield('classPlan')><a href="{{route('admin.plan.index')}}" class="iq-waves-effect"><i class="las la-file-invoice-dollar"></i><span>Plans</span></a></li>
                     <li @yield('categories')>
                         <a href="#category" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-list-ul"></i><span>Category</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                         <ul id="category" class="iq-submenu collapse @yield('CategoryShow')" data-parent="#iq-sidebar-toggle">
@@ -82,6 +83,16 @@
                             <li @yield('seasonList')><a href="{{route('admin.show.season.index')}}"><i class="las la-tasks"></i>Seasons List</a></li>
                         </ul>
                     </li>
+                    <li @yield('settings')>
+                        <a href="#settings" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="las la-cogs"></i><span>Settings</span><i
+                                class="ri-arrow-right-s-line iq-arrow-right"></i>
+                        </a>
+                        <ul id="settings" class="iq-submenu collapse @yield('showsSettings')" data-parent="#iq-sidebar-toggle">
+                            <li @yield('showGeneral')><a href="{{route('admin.settings.general')}}"><i class="las la-cog"></i>General Settings</a></li>
+{{--                            <li @yield('showSocial')><a href="{{route('admin.settings.social.media')}}"><i class="las la-link"></i>Social Media Settings</a></li>--}}
+                            <li @yield('showPayment')><a href="{{route('admin.settings.payment')}}"><i class="las la-money-check"></i>Payment Gateways</a></li>
+                        </ul>
+                    </li>
 {{--                    <li @yield('fileManager')><a href="{{route('admin.file.manager')}}" class="iq-waves-effect"><i class="las la-user-friends"></i><span>File Manager</span></a></li>--}}
                 </ul>
             </nav>
@@ -97,9 +108,9 @@
                     </div>
                     <div class="iq-navbar-logo d-flex justify-content-between">
                         <a href="#" class="header-logo">
-                            <img src="{{asset('admin/images/logo.png')}}" class="img-fluid rounded-normal" alt="">
+                            <img src="{{asset('uploads/website/logo.png')}}" class="img-fluid rounded-normal" alt="">
                             <div class="logo-title">
-                                <span class="text-primary text-uppercase">Streamit</span>
+                                <span class="text-primary text-uppercase">{{env('APP_NAME')}}</span>
                             </div>
                         </a>
                     </div>

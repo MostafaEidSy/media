@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{env('APP_NAME')}} | @yield('title')</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('site/images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{asset('uploads/website/icon.png')}}" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('site/css/bootstrap.min.css')}}" />
     <!-- Typography CSS -->
@@ -41,13 +41,16 @@
                                 <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                             </div>
                         </a>
-                        <a class="navbar-brand" href="{{route('index')}}"> <img class="img-fluid logo" src="{{asset('site/images/logo.png')}}" alt="streamit" /> </a>
+                        <a class="navbar-brand" href="{{route('index')}}"> <img class="img-fluid logo" src="{{asset('uploads/website/logo.png')}}" alt="{{env('APP_NAME')}}" /> </a>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <div class="menu-main-menu-container">
                                 <ul id="top-menu" class="navbar-nav ml-auto">
-                                    <li class="menu-item">
-                                        <a href="{{route('index')}}">Home</a>
-                                    </li>
+                                    <?php $categories = \App\Models\CategoryVideo::where('in_menu', 1)->get(); ?>
+                                    @foreach($categories as $category)
+                                        <li class="menu-item">
+                                            <a href="{{route('show.category', $category->slug)}}">{{$category->name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -71,57 +74,69 @@
                                                 </form>
                                             </div>
                                         </li>
-                                        <li>
-                                            <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
-                                                <img src="{{asset('site/images/user/user.jpg')}}" class="img-fluid avatar-40 rounded-circle" alt="user">
-                                            </a>
-                                            <div class="iq-sub-dropdown iq-user-dropdown">
-                                                <div class="iq-card shadow-none m-0">
-                                                    <div class="iq-card-body p-0 pl-3 pr-3">
-                                                        <a href="#" class="iq-sub-card setting-dropdown">
-                                                            <div class="media align-items-center">
-                                                                <div class="right-icon">
-                                                                    <i class="ri-file-user-line text-primary"></i>
+                                        @if(auth('web')->check())
+                                            <li>
+                                                <a href="#" class="iq-user-dropdown search-toggle d-flex align-items-center">
+                                                    @if(auth()->user()->avatar != null || auth()->user()->avatar != '')
+                                                        <img src="{{asset('uploads/images/users/avatar/' . auth()->user()->avatar)}}" class="img-fluid avatar-40 rounded-circle" alt="{{auth()->user()->name}}">
+                                                    @else
+                                                        <img src="{{asset('uploads/images/users/avatar/user.png')}}" class="img-fluid avatar-40 rounded-circle" alt="{{auth()->user()->name}}">
+                                                    @endif
+                                                </a>
+                                                <div class="iq-sub-dropdown iq-user-dropdown">
+                                                    <div class="iq-card shadow-none m-0">
+                                                        <div class="iq-card-body p-0 pl-3 pr-3">
+                                                            <a href="{{route('manage.profile')}}" class="iq-sub-card setting-dropdown">
+                                                                <div class="media align-items-center">
+                                                                    <div class="right-icon">
+                                                                        <i class="ri-file-user-line text-primary"></i>
+                                                                    </div>
+                                                                    <div class="media-body ml-3">
+                                                                        <h6 class="mb-0 ">Manage Profile</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="media-body ml-3">
-                                                                    <h6 class="mb-0 ">Manage Profile</h6>
+                                                            </a>
+                                                            <a href="{{route('manage.profile.setting')}}" class="iq-sub-card setting-dropdown">
+                                                                <div class="media align-items-center">
+                                                                    <div class="right-icon">
+                                                                        <i class="ri-settings-4-line text-primary"></i>
+                                                                    </div>
+                                                                    <div class="media-body ml-3">
+                                                                        <h6 class="mb-0 ">Settings</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#" class="iq-sub-card setting-dropdown">
-                                                            <div class="media align-items-center">
-                                                                <div class="right-icon">
-                                                                    <i class="ri-settings-4-line text-primary"></i>
+                                                            </a>
+                                                            <a href="{{route('pricing')}}" class="iq-sub-card setting-dropdown">
+                                                                <div class="media align-items-center">
+                                                                    <div class="right-icon">
+                                                                        <i class="ri-settings-4-line text-primary"></i>
+                                                                    </div>
+                                                                    <div class="media-body ml-3">
+                                                                        <h6 class="mb-0 ">Pricing Plan</h6>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="media-body ml-3">
-                                                                    <h6 class="mb-0 ">Settings</h6>
+                                                            </a>
+                                                            <a href="{{route('logout')}}" class="iq-sub-card setting-dropdown">
+                                                                <div class="media align-items-center">
+                                                                    <div class="right-icon">
+                                                                        <i class="ri-logout-circle-line text-primary"></i>
+                                                                    </div>
+                                                                    <div class="media-body ml-3">
+                                                                        <h6 class="mb-0">Logout</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#" class="iq-sub-card setting-dropdown">
-                                                            <div class="media align-items-center">
-                                                                <div class="right-icon">
-                                                                    <i class="ri-settings-4-line text-primary"></i>
-                                                                </div>
-                                                                <div class="media-body ml-3">
-                                                                    <h6 class="mb-0 ">Pricing Plan</h6>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a href="#" class="iq-sub-card setting-dropdown">
-                                                            <div class="media align-items-center">
-                                                                <div class="right-icon">
-                                                                    <i class="ri-logout-circle-line text-primary"></i>
-                                                                </div>
-                                                                <div class="media-body ml-3">
-                                                                    <h6 class="mb-0">Logout</h6>
-                                                                </div>
-                                                            </div>
-                                                        </a>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @else
+                                            <li>
+                                                <a href="{{route('getLogin')}}" style="font-size: 1.25rem;line-height: 1;background-color: transparent;border: 1px solid transparent;border-radius: .25rem;">
+                                                    <i class="ri-login-circle-line"></i>
+                                                </a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -141,7 +156,7 @@
                                         </form>
                                     </div>
                                 </li>
-                                @if(auth()->check())
+                                @if(auth('web')->check())
                                     <li class="nav-item nav-icon">
                                         <a href="#" class="iq-user-dropdown search-toggle p-0 d-flex align-items-center" data-toggle="search-toggle">
                                             @if(auth()->user()->avatar != null || auth()->user()->avatar != '')
@@ -221,24 +236,26 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Movies</a></li>
-                        <li><a href="#">Tv Shows</a></li>
-                        <li><a href="#">Coporate Information</a></li>
+                        <?php $pages1 = \App\Models\Page::where('in_footer', 1)->get(); ?>
+                        @foreach($pages1 as $page)
+                            <li><a href="{{route('show.page', $page->slug)}}">{{$page->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Help</a></li>
+                        <?php $pages2 = \App\Models\Page::where('in_footer', 2)->get(); ?>
+                        @foreach($pages2 as $page)
+                            <li><a href="{{route('show.page', $page->slug)}}">{{$page->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <ul class="f-link list-unstyled mb-0">
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Cotact Us</a></li>
-                        <li><a href="#">Legal Notice</a></li>
+                        <?php $pages3 = \App\Models\Page::where('in_footer', 3)->get(); ?>
+                        @foreach($pages3 as $page)
+                                <li><a href="{{route('show.page', $page->slug)}}">{{$page->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-12 r-mt-15">

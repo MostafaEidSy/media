@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CategoriesController extends Controller
 {
     public function index(){
-        $categories = CategoryVideo::all();
+        $categories = CategoryVideo::with(['videos'])->get();
         return view('admin.category.index', compact('categories'));
     }
     public function create(){
@@ -66,6 +66,25 @@ class CategoriesController extends Controller
             }
         }else{
             return redirect()->route('admin.category.index')->with(['message' => 'Sorry, This Category Does Not Exist', 'alert-type' => 'danger']);
+        }
+    }
+    public function updateInMenu(Request $request){
+        $category = CategoryVideo::where('id', $request->id)->first();
+        if(!$category){
+            return response()->json([
+                'status'     => false
+            ], 500);
+        }else{
+            $change = $category->update(['in_menu' => $request->in_menu]);
+            if($change){
+                return response()->json([
+                    'status'        => true
+                ], 200);
+            }else{
+                return response()->json([
+                    'status'        => false
+                ], 501);
+            }
         }
     }
 }

@@ -2,6 +2,10 @@
 
 @section('title', 'Categories')
 
+@section('style')
+    <link rel="stylesheet" href="{{asset('site/css/sweetalert2.min.css')}}">
+@endsection
+
 @section('categories')
     class="active active-menu"
 @endsection
@@ -34,8 +38,9 @@
                                     <tr>
                                         <th style="width:5%;">No</th>
                                         <th style="width:20%;">Name</th>
-                                        <th style="width:40%;">Description</th>
+                                        <th style="width:30%;">Description</th>
                                         <th style="width:10%;">Videos</th>
+                                        <th style="width:10%;">Show In Menu</th>
                                         <th style="width:5%;">Status</th>
                                         <th style="width:20%;">Action</th>
                                     </tr>
@@ -46,7 +51,13 @@
                                                 <td>{{$category->id}}</td>
                                                 <td>{{$category->name}}</td>
                                                 <td><p>{{$category->description}}</p></td>
-                                                <td>20</td>
+                                                <td>{{count($category->videos)}}</td>
+                                                <td>
+                                                    <div class="custom-control custom-switch" data-value="{{$category->in_menu}}" data-id="{{$category->id}}">
+                                                        <input type="checkbox" class="custom-control-input customSwitchClass" id="customSwitch{{$category->id}}" @if($category->in_menu == 1) checked @endif name="in_menu">
+                                                        <label class="custom-control-label" for="customSwitch{{$category->id}}"></label>
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
                                                         @if($category->status == 1)
@@ -74,4 +85,71 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script src="{{asset('site/js/sweetalert2.all.min.js')}}"></script>
+    <script>
+        $(function () {
+            $('.customSwitchClass').on('change', function () {
+                if ($(this).parent().attr('data-value') === '1'){
+                    var categoryId = $(this).parent().attr('data-id');
+                    $.ajax({
+                        type: 'post',
+                        url: '{{route('admin.category.update.in.menu')}}',
+                        data : {
+                            '_token': "{{csrf_token()}}",
+                            'id' : categoryId,
+                            'in_menu' : 0
+                        },
+                        success: function (data) {
+                            if(data.status === true){
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'In Menu Category Updated successfully'
+                                })
+                            }
+                            $(this).parent().attr('data-value', '0');
+                        }, error: function (reject) {
+                        }
+                    });
+                }else if($(this).parent().attr('data-value') === '0'){
+                    var categoryId = $(this).parent().attr('data-id');
+                    $.ajax({
+                        type: 'post',
+                        url: '{{route('admin.category.update.in.menu')}}',
+                        data : {
+                            '_token': "{{csrf_token()}}",
+                            'id' : categoryId,
+                            'in_menu' : 1
+                        },
+                        success: function (data) {
+                            if(data.status === true){
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                })
+
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: 'In Menu Category Updated successfully'
+                                })
+                            }
+                            $(this).parent().attr('data-value', '1');
+                        }, error: function (reject) {
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

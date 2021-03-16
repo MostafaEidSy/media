@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryVideosTable extends Migration
+class CreatePlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateCategoryVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_videos', function (Blueprint $table) {
+        Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->string('slug')->unique();
-            $table->tinyInteger('in_menu')->default(0);
+            $table->text('description');
+            $table->integer('price');
+            $table->string('currency');
+            $table->text('paypal_id')->nullable();
+            $table->text('stripe_id')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateCategoryVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_videos');
+        Schema::dropIfExists('plans');
     }
 }

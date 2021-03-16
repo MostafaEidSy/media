@@ -16,6 +16,6 @@ class CategoryVideo extends Model
         return $this->hasMany(Video::class, 'category_id', 'id');
     }
     public function shows(){
-        return $this->hasMany(Show::class, 'show_id', 'id');
+        return $this->hasMany(Show::class, 'category_id', 'id');
     }
 }

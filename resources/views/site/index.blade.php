@@ -18,7 +18,7 @@
                                 <div class="col-xl-6 col-lg-12 col-md-12">
                                     <a href="javascript:void(0);">
                                         <div class="channel-logo" data-animation-in="fadeInLeft" data-delay-in="0.5">
-                                            <img src="{{asset('site/images/logo.png')}}" class="c-logo" alt="streamit">
+                                            <img src="{{asset('uploads/website/logo.png')}}" class="c-logo" alt="{{env('APP_NAME')}}">
                                         </div>
                                     </a>
                                     <h1 class="slider-text big-title title text-uppercase" data-animation-in="fadeInLeft" data-delay-in="0.6">{{$show->title}}</h1>

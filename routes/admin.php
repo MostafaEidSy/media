@@ -36,6 +36,7 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
       Route::post('/story', 'CategoriesController@story')->name('admin.category.story');
       Route::get('/edit/{id}', 'CategoriesController@edit')->name('admin.category.edit');
       Route::post('/update/{id}', 'CategoriesController@update')->name('admin.category.update');
+      Route::post('/update-in-menu', 'CategoriesController@updateInMenu')->name('admin.category.update.in.menu');
    });
 
    Route::group(['prefix' => 'videos'], function (){
@@ -91,6 +92,22 @@ Route::group(['prefix' => 'cp/admin', 'namespace' => 'Admin', 'middleware' => 'a
        Route::get('/edit/{id}', 'PageController@edit')->name('admin.page.edit');
        Route::post('/update/{id}', 'PageController@update')->name('admin.page.update');
        Route::get('/delete/{id}', 'PageController@delete')->name('admin.page.delete');
+   });
+
+   Route::group(['prefix' => 'settings'], function (){
+       Route::get('/general', 'SettingController@general')->name('admin.settings.general');
+       Route::post('/general', 'SettingController@updateGeneral')->name('admin.settings.update.general');
+       Route::get('/social-media', 'SettingController@socialMedia')->name('admin.settings.social.media');
+       Route::get('/payment-gateways', 'SettingController@paymentGateways')->name('admin.settings.payment');
+       Route::post('/update-paypal', 'SettingController@updatePaypal')->name('admin.settings.update.paypal');
+       Route::post('/update-stripe', 'SettingController@updateStripe')->name('admin.settings.update.stripe');
+   });
+
+   Route::group(['prefix' => 'plan'], function (){
+       Route::get('/', 'PlanController@index')->name('admin.plan.index');
+       Route::get('/add-plan', 'PlanController@create')->name('admin.plan.create');
+       Route::post('/story', 'PlanController@story')->name('admin.plan.story');
+       Route::get('/delete/{id}', 'PlanController@delete')->name('admin.plan.delete');
    });
 
 });

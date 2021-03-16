@@ -24,6 +24,14 @@ class CreateUsersTable extends Migration
             $table->string('language')->nullable();
             $table->string('gender')->default('Male');
             $table->text('abstract')->nullable();
+            $table->string('city')->nullable();
+            $table->text('address')->nullable();
+            $table->integer('postal_code')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->tinyInteger('activation_method')->default(0);
+            $table->string('status')->default('guest');
+            $table->text('roles_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

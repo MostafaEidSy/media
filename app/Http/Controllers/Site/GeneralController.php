@@ -10,6 +10,7 @@ use App\Models\CategoryVideo;
 use App\Models\Comment;
 use App\Models\Favorite;
 use App\Models\Page;
+use App\Models\Plan;
 use App\Models\Show;
 use App\Models\User;
 use App\Models\Video;
@@ -124,7 +125,8 @@ class GeneralController extends Controller
         }
     }
     public function pricing(){
-        return view('site.pricing');
+        $plans = Plan::all();
+        return view('site.pricing', compact('plans'));
     }
     public function addFavorites($id)
     {
@@ -226,6 +228,22 @@ class GeneralController extends Controller
             return view('site.show-page', compact('page'));
         }else{
             return redirect()->route('index');
+        }
+    }
+    public function showCategory($slug){
+        $category = CategoryVideo::where('slug', $slug)->with(['videos', 'shows'])->first();
+        if ($category){
+            return view('site.show-category', compact('category'));
+        }else{
+            return redirect()->route('index');
+        }
+    }
+    public function checkout($id, $name){
+        $plan = Plan::where('id', $id)->whereName($name)->first();
+        if ($plan){
+            return view('site.checkout', compact('plan'));
+        }else{
+            return redirect()->back();
         }
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Site'], function (){
@@ -13,14 +14,39 @@ Route::group(['namespace' => 'Site'], function (){
    Route::get('/pricing', 'GeneralController@pricing')->name('pricing');
    Route::get('/{slug}', 'GeneralController@showDetails')->name('show.details');
    Route::get('/page/{slug}', 'GeneralController@showPage')->name('show.page');
+   Route::get('/category/{slug}', 'GeneralController@showCategory')->name('show.category');
    Route::group(['middleware' => 'auth:web'], function (){
-       Route::get('/logout', 'GeneralController@logout')->name('logout');
-       Route::get('/manage-profile', 'GeneralController@manage')->name('manage.profile');
-       Route::post('/manage-profile/{id}', 'GeneralController@updateManage')->name('manage.profile.update');
-       Route::get('/setting-profile', 'GeneralController@settingProfile')->name('manage.profile.setting');
+       Route::group(['middleware' => ['role:user']], function (){
+           Route::get('/demo/demo', function (){echo 'ok';});
+       });
+       Route::get('/role/role', function (){
+           if (auth()->user()->can('user')){
+               return redirect()->route('index2');
+           }
+           $user = \App\Models\User::where('id', auth()->user()->id)->first();
+           auth()->user()->assignRole('user');
+           auth()->user()->givePermissionTo('Subscriber');
+           return redirect()->back();
+       });
+       Route::get('/user/logout', 'GeneralController@logout')->name('logout');
+       Route::get('/user/manage-profile', 'GeneralController@manage')->name('manage.profile');
+       Route::post('/user/manage-profile/{id}', 'GeneralController@updateManage')->name('manage.profile.update');
+       Route::get('/user/setting-profile', 'GeneralController@settingProfile')->name('manage.profile.setting');
        Route::get('/add-favorites/{id}', 'GeneralController@addFavorites')->name('add.favorites');
-       Route::get('watch-show/{slug}/{videoId?}', 'GeneralController@watchShow')->name('watch.show');
-       Route::get('watch-video/{slug}', 'GeneralController@watchVideo')->name('watch.video');
-       Route::post('add-comment', 'GeneralController@addComment')->name('add.comment');
+       Route::get('/watch-show/{slug}/{videoId?}', 'GeneralController@watchShow')->name('watch.show');
+       Route::get('/watch-video/{slug}', 'GeneralController@watchVideo')->name('watch.video');
+       Route::post('/add-comment', 'GeneralController@addComment')->name('add.comment');
+       Route::get('/{id}/checkout/{name?}', 'GeneralController@checkout')->name('checkout');
+       Route::get('/subscription/{planId?}/{subscriptionId?}/{billingToken?}/{orderID?}', 'PaymentController@subscription')->name('create-agreement');
    });
 });
+
+//Route::get('stripe', function (){
+//    return view('stripe');
+//});
+//Route::post('/subscribe', function (Request $request){
+//    $token = $request->stripeToken;
+//    auth()->user()->newSubscription('main','monthly')->withCoupon($request->coupon)->create($token);
+//    auth()->user()->assignRole('subscriber');
+//    return redirect('/');
+//});

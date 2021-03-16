@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryVideosTable extends Migration
+class CreateSocialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateCategoryVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_videos', function (Blueprint $table) {
+        Schema::create('socials', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->tinyInteger('status')->default(1);
-            $table->string('slug')->unique();
-            $table->tinyInteger('in_menu')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateCategoryVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_videos');
+        Schema::dropIfExists('socials');
     }
 }

@@ -18,7 +18,8 @@ class CategoryVideoTableSeeder extends Seeder
                 'name'              => $name[$i],
                 'description'       => $fac->paragraph,
                 'status'            => mt_rand(0,1),
-                'slug'              => strtolower(str_replace(' ', '-', $name[$i]))
+                'slug'              => strtolower(str_replace(' ', '-', $name[$i])),
+                'in_menu'           => mt_rand(0,1)
             ]);
         }
     }
