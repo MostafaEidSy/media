@@ -25,14 +25,15 @@ class PaymentController extends Controller
             'Content-Type' => 'application/json',
         ])->withBasicAuth(env('PAYPAL_ID'), env('PAYPAL_SECRET'))->get($url);
         $response = json_encode($request->body());
-        $user = User::where('id', auth()->user()->id)->first();
-        $update = $user->update([
-            'start_date'            => date('d-m-Y', strtotime($response->start_time)),
-            'end_date'              => date('d-m-Y', strtotime($response->billing_info->next_billing_time)),
-            'status'                => strtolower($response->status)
-        ]);
-        auth()->user()->assignRole('user');
-        auth()->user()->givePermissionTo('Subscriber');
-        return redirect()->route('index')->with(['msg' => 'The Subscription Process Was Successful. You Can Now Browse All Site Data, Thank You', 'status' => 'success']);
+        return response()->json($response);
+//        $user = User::where('id', auth()->user()->id)->first();
+//        $update = $user->update([
+//            'start_date'            => date('d-m-Y', strtotime($response->start_time)),
+//            'end_date'              => date('d-m-Y', strtotime($response->billing_info->next_billing_time)),
+//            'status'                => strtolower($response->status)
+//        ]);
+//        auth()->user()->assignRole('user');
+//        auth()->user()->givePermissionTo('Subscriber');
+//        return redirect()->route('index')->with(['msg' => 'The Subscription Process Was Successful. You Can Now Browse All Site Data, Thank You', 'status' => 'success']);
     }
 }
