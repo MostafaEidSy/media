@@ -23,18 +23,16 @@ class PaymentController extends Controller
         $url = 'https://api-m.sandbox.paypal.com/v1/billing/subscriptions/' . $subscriptionId;
         $request = Http::withHeaders([
             'Content-Type' => 'application/json',
-//            'Authorization' => 'Basic ' . env('PAYPAL_ID') . env('PAYPAL_SECRET')
         ])->withBasicAuth(env('PAYPAL_ID'), env('PAYPAL_SECRET'))->get($url);
         $response = $request->json();
-        dd($response, $request);
-//        $user = User::where('id', auth()->user()->id)->first();
-//        $update = $user->update([
-//            'start_date'            => date('d-m-Y', strtotime($response->start_time)),
-//            'end_date'              => date('d-m-Y', strtotime($response->billing_info->next_billing_time)),
-//            'status'                => strtolower($response->status)
-//        ]);
-//        auth()->user()->assignRole('user');
-//        auth()->user()->givePermissionTo('Subscriber');
-//        return redirect()->route('index')->with(['msg' => 'The Subscription Process Was Successful. You Can Now Browse All Site Data, Thank You', 'status' => 'success']);
+        $user = User::where('id', auth()->user()->id)->first();
+        $update = $user->update([
+            'start_date'            => date('d-m-Y', strtotime($response->start_time)),
+            'end_date'              => date('d-m-Y', strtotime($response->billing_info->next_billing_time)),
+            'status'                => strtolower($response->status)
+        ]);
+        auth()->user()->assignRole('user');
+        auth()->user()->givePermissionTo('Subscriber');
+        return redirect()->route('index')->with(['msg' => 'The Subscription Process Was Successful. You Can Now Browse All Site Data, Thank You', 'status' => 'success']);
     }
 }
