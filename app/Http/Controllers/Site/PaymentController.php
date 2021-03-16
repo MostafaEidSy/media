@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $request = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->withBasicAuth(env('PAYPAL_ID'), env('PAYPAL_SECRET'))->get($url);
-        $response = json_encode($request->body());
+        $response = json_decode($request->body());
         return response()->json($response);
 //        $user = User::where('id', auth()->user()->id)->first();
 //        $update = $user->update([
