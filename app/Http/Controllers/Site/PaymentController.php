@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $request = Http::withHeaders([
             'Content-Type' => 'application/json',
         ])->withBasicAuth(env('PAYPAL_ID'), env('PAYPAL_SECRET'))->get($url);
-        $response = $request;
+        $response = $request->body();
         $user = User::where('id', auth()->user()->id)->first();
         $update = $user->update([
             'start_date'            => date('d-m-Y', strtotime($response->start_time)),
