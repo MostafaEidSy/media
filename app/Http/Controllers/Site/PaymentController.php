@@ -23,8 +23,8 @@ class PaymentController extends Controller
         $url = 'https://api-m.sandbox.paypal.com/v1/billing/subscriptions/' . $subscriptionId;
         $request = Http::withHeaders([
             'Content-Type' => 'application/json',
-            'Authorization' => 'Basic ' . env('PAYPAL_ID') . env('PAYPAL_SECRET')
-        ])->get($url);
+//            'Authorization' => 'Basic ' . env('PAYPAL_ID') . env('PAYPAL_SECRET')
+        ])->withBasicAuth(env('PAYPAL_ID'), env('PAYPAL_SECRET'))->get($url);
         $response = $request->json();
         dd($response, $request);
 //        $user = User::where('id', auth()->user()->id)->first();
