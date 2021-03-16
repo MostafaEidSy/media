@@ -25,7 +25,7 @@ class PaymentController extends Controller
             'Content-Type' => 'application/json',
             'Authorization' => 'Basic ' . env('PAYPAL_ID') . ':' . env('PAYPAL_SECRET')
         ])->get($url);
-        $response = $request->body();
+        $response = $request->json();
         $user = User::where('id', auth()->user()->id)->first();
         $update = $user->update([
             'start_date'            => date('d-m-Y', strtotime($response->start_time)),
