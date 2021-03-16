@@ -28,8 +28,8 @@ class PaymentController extends Controller
 //        return response()->json($response);
         $user = User::where('id', auth()->user()->id)->first();
         $update = $user->update([
-            'start_date'            => date('d-m-Y', strtotime($response->start_time)),
-            'end_date'              => date('d-m-Y', strtotime($response->billing_info->next_billing_time)),
+            'start_date'            => date('Y-m-d', strtotime($response->start_time)),
+            'end_date'              => date('Y-m-d', strtotime($response->billing_info->next_billing_time)),
             'status'                => strtolower($response->status)
         ]);
         auth()->user()->assignRole('user');
